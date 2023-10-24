@@ -6,6 +6,6 @@
 
 - masukan semua hasil proses kedalam folder data
 
-- ubah data pada [update-app.py](./update-app.py) sesuai dengan hasil sebelumnya
+- ubah data pada [update-app.py](./update-app.py) dan [skripsi.py](./skripsi.py) sesuai dengan hasil sebelumnya
 
-- jalankan [update-app.py](./update-app.py) dengan command : streamlit run update-app.py
+- jalankan [update-app.py](./update-app.py) dan [skripsi.py](./skripsi.py) dengan command : streamlit run update-app.py
