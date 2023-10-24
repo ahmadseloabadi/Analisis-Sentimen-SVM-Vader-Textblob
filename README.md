@@ -2,6 +2,8 @@
 
 - aplikasi ini dibuat dengan framework streamlit
 
+- install library yg di butuhkan
+
 - untuk melakukan pengolahan dataset dan melatih model dapat menjalankan program [prepro&trainmodel.ipynb](./prepro&trainmodel.ipynb)
 
 - masukan semua hasil proses kedalam folder data
