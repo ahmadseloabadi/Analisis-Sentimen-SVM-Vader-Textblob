@@ -113,13 +113,13 @@ with st.sidebar :
     selected = option_menu('sentimen analisis',['Home','Pengolahan data','Uji','Report'])
 
 if(selected == 'Home') :
-    st.title('PENERAPAN METODE SMOTE DAN K-NEAREST NEIGHBOR PADA IMBALANCE DATA ANALISIS SENTIMEN ULASAN APLIKASI TIX ID ')
-    st.write('Aplikasi TIX ID merupakan aplikasi yang memberikan layanan pemesanan tiket bioskop secara online yang dirilis oleh PT. Nusantara Elang Sejahtera')
-    # import gambar pada halaman home
+    st.title('ANALISIS SENTIMEN ULASAN APLIKASI SHOPEE DENGAN METODE SVM DAN TEXTBLOB ')
+    st.write('Shopee adalah platform belanja online terdepan di Asia Tenggara dan Taiwan. Diluncurkan tahun 2015, Shopee merupakan sebuah platform yang disesuaikan untuk tiap wilayah dan menyediakan pengalaman berbelanja online yang mudah, aman, dan cepat bagi pelanggan melalui dukungan pembayaran dan logistik yang kuat.')
+   # import gambar pada halaman home
     image = Image.open('img/Shopee.png')
     st.image(image)
-    st.title('dataset ulasan Jnt')
-    st.write('dataset diambil dengan cara scrapping melalui social media twitter')
+    st.title('dataset ulasan shopee')
+    st.write('dataset diambil dari situs kaggle')
     dataset_awal = pd.read_csv('data/dataset/shopee_ulasan_label7.csv')
     st.dataframe(dataset_awal)
 
@@ -131,7 +131,7 @@ elif(selected == 'Pengolahan data') :
         menu_dataset = st.selectbox('pelabelan dataset',('Manual', 'textblob'))
         # ini bagian untuk nampilin dataset sentimen manual
         if (menu_dataset =='Manual'): 
-            st.write('dataset ulasan JNT dengan pelabelan secara menual')
+            st.write('dataset ulasan shopee dengan pelabelan secara menual')
             # import dataset sentimen manual
             dataset = pd.read_csv('data/dataset/sentimen_manual.csv')
             # membuat fungsi untuk sentimen pada dataset
@@ -165,7 +165,7 @@ elif(selected == 'Pengolahan data') :
             st.pyplot(fig1)
             # ini buat nampilin dataset sentimen textblob /automatis 
         elif (menu_dataset =='textblob') :
-            st.write('dataset ulasan JNT dengan pelabelan menggunakan textblob based')
+            st.write('dataset ulasan shopee dengan pelabelan menggunakan textblob based')
             dataset = pd.read_csv('data/dataset/sentimen_textblob.csv')
             def sentimen_textblob(dataset, sentiment):
                 return dataset[dataset['Sentimen'].isin(sentiment)]

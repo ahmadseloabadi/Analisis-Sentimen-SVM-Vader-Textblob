@@ -136,13 +136,13 @@ with st.sidebar :
     selected = option_menu('sentimen analisis',['Home','Pengolahan data','Uji','Report'])
 
 if(selected == 'Home') :
-    st.title('PENERAPAN METODE SMOTE DAN K-NEAREST NEIGHBOR PADA IMBALANCE DATA ANALISIS SENTIMEN ULASAN APLIKASI TIX ID ')
-    st.write('Aplikasi TIX ID merupakan aplikasi yang memberikan layanan pemesanan tiket bioskop secara online yang dirilis oleh PT. Nusantara Elang Sejahtera')
+    st.title('ANALISIS SENTIMEN ULASAN APLIKASI SHOPEE DENGAN METODE SVM DAN TEXTBLOB ')
+    st.write('Shopee adalah platform belanja online terdepan di Asia Tenggara dan Taiwan. Diluncurkan tahun 2015, Shopee merupakan sebuah platform yang disesuaikan untuk tiap wilayah dan menyediakan pengalaman berbelanja online yang mudah, aman, dan cepat bagi pelanggan melalui dukungan pembayaran dan logistik yang kuat.')
     # import gambar pada halaman home
     image = Image.open('img/Shopee.png')
     st.image(image)
     st.title('dataset ulasan SHOPEE')
-    st.write('dataset diambil dengan cara scrapping melalui situs kaggle')
+    st.write('dataset diambil dari situs kaggle')
     dataset_awal = pd.read_csv('data/dataset/shopee_ulasan_label7.csv')
     st.dataframe(dataset_awal)
 
