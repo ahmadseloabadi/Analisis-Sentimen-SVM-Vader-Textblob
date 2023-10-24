@@ -251,7 +251,7 @@ elif(selected == 'Pengolahan data') :
         st.dataframe(tfidf,use_container_width=True) 
 elif(selected == 'Uji') :
 
-    opsi_metode = st.selectbox('METODE',('SVM', 'SVM-lexicon'))
+    opsi_metode = st.selectbox('METODE',('SVM', 'SVM-textblob'))
     kalimat_baru = st.text_input('masukan kalimat',value="tingkatkan terus kalau bisa ada kerjasama dengan paylater")
     
     kcleansing = cleansing(kalimat_baru)
@@ -280,7 +280,7 @@ elif(selected == 'Uji') :
         else:
             st.write('Hasil') 
 
-    elif (opsi_metode == 'SVM-lexicon') :
+    elif (opsi_metode == 'SVM-textblob') :
         if st.button('predik') :
             st.write('Hasil pengujian dengan metode',opsi_metode)
             # Making the SVM Classifer
