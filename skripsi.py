@@ -250,49 +250,76 @@ elif(selected == 'Pengolahan data') :
         tfidf = pd.read_csv('data/prepro/hasil TF IDF.csv')
         st.dataframe(tfidf,use_container_width=True) 
 elif(selected == 'Uji') :
+    opsi1,opsi2=st.tabs(['opsi tampilan 1','opsi tampilan 2'])
+    with opsi1 :
+        opsi_metode = st.selectbox('METODE',('SVM', 'SVM-textblob'))
+        kalimat_baru = st.text_input('masukan kalimat',value="tingkatkan terus kalau bisa ada kerjasama dengan paylater")
+        
+        kcleansing = cleansing(kalimat_baru)
+        kcasefolding = casefolding(kcleansing)
+        ktokenizing = tokenizing(kcasefolding)
+        kslangword = slangword(ktokenizing)
+        kstopword = stopword(kslangword)
+        kstemming = stemming(kstopword)
+        kdatastr = str(kstemming)
+        # ktfidf =vectorizer.transform([kdatastr])
 
-    opsi_metode = st.selectbox('METODE',('SVM', 'SVM-textblob'))
-    kalimat_baru = st.text_input('masukan kalimat',value="tingkatkan terus kalau bisa ada kerjasama dengan paylater")
-    
-    kcleansing = cleansing(kalimat_baru)
-    kcasefolding = casefolding(kcleansing)
-    ktokenizing = tokenizing(kcasefolding)
-    kslangword = slangword(ktokenizing)
-    kstopword = stopword(kslangword)
-    kstemming = stemming(kstopword)
-    kdatastr = str(kstemming)
-    # ktfidf =vectorizer.transform([kdatastr])
+        if (opsi_metode == 'SVM') :
+            if st.button('predik') :
+                st.write('Hasil pengujian dengan metode',opsi_metode)
+                # Making the SVM Classifer
+                # Melatih model
+                model, vectorizer = train_sentiment_svm(X_manual, Y_manual)
+                predictions = predict_sentiment(model, vectorizer, kdatastr)
+                st.write('hasil casefolding :',str(kcasefolding))
+                st.write('hasil cleansing :',str(kcleansing))
+                st.write('hasil tokenizing :',str(ktokenizing))
+                st.write('hasil slangword :',str(kslangword))
+                st.write('hasil stopword :',str(kstopword))
+                st.write('hasil stemming :',str(kstemming))
+                st.write(f"hasil prediksi menggunakan metode {opsi_metode} adalah {predictions}")
+            else:
+                st.write('Hasil') 
 
-    if (opsi_metode == 'SVM') :
-        if st.button('predik') :
-            st.write('Hasil pengujian dengan metode',opsi_metode)
-            # Making the SVM Classifer
-            # Melatih model
-            model, vectorizer = train_sentiment_svm(X_manual, Y_manual)
-            predictions = predict_sentiment(model, vectorizer, kdatastr)
+        elif (opsi_metode == 'SVM-textblob') :
+            if st.button('predik') :
+                st.write('Hasil pengujian dengan metode',opsi_metode)
+                # Making the SVM Classifer
+                model, vectorizer = train_sentiment_svm(X_textblob, X_textblob)
+                predictions = predict_sentiment(model, vectorizer, kdatastr)
+                st.write('hasil casefolding :',str(kcasefolding))
+                st.write('hasil cleansing :',str(kcleansing))
+                st.write('hasil tokenizing :',str(ktokenizing))
+                st.write('hasil slangword :',str(kslangword))
+                st.write('hasil stopword :',str(kstopword))
+                st.write('hasil stemming :',str(kstemming))
+                st.write(f"hasil prediksi menggunakan metode {opsi_metode} adalah {predictions}")
+            else:
+                st.write('Hasil') 
+    with opsi2 :
+        kalimat_baru = st.text_input('masukan kalimat',value="tingkatkan terus kalau bisa ada kerjasama dengan paylater.")
+        
+        kcleansing = cleansing(kalimat_baru)
+        kcasefolding = casefolding(kcleansing)
+        ktokenizing = tokenizing(kcasefolding)
+        kslangword = slangword(ktokenizing)
+        kstopword = stopword(kslangword)
+        kstemming = stemming(kstopword)
+        kdatastr = str(kstemming)
+        
+        if st.button('prediksi') :
+            model_manual, vectorizer_manual = train_sentiment_svm(X_manual, Y_manual)
+            predictions_manual = predict_sentiment(model_manual, vectorizer_manual, kdatastr)
+            model_textblob, vectorizer_textblob = train_sentiment_svm(X_textblob, X_textblob)
+            predictions_textblob = predict_sentiment(model_textblob, vectorizer_textblob, kdatastr)
             st.write('hasil casefolding :',str(kcasefolding))
             st.write('hasil cleansing :',str(kcleansing))
             st.write('hasil tokenizing :',str(ktokenizing))
             st.write('hasil slangword :',str(kslangword))
             st.write('hasil stopword :',str(kstopword))
             st.write('hasil stemming :',str(kstemming))
-            st.write(f"hasil prediksi menggunakan metode {opsi_metode} adalah {predictions}")
-        else:
-            st.write('Hasil') 
-
-    elif (opsi_metode == 'SVM-textblob') :
-        if st.button('predik') :
-            st.write('Hasil pengujian dengan metode',opsi_metode)
-            # Making the SVM Classifer
-            model, vectorizer = train_sentiment_svm(X_textblob, X_textblob)
-            predictions = predict_sentiment(model, vectorizer, kdatastr)
-            st.write('hasil casefolding :',str(kcasefolding))
-            st.write('hasil cleansing :',str(kcleansing))
-            st.write('hasil tokenizing :',str(ktokenizing))
-            st.write('hasil slangword :',str(kslangword))
-            st.write('hasil stopword :',str(kstopword))
-            st.write('hasil stemming :',str(kstemming))
-            st.write(f"hasil prediksi menggunakan metode {opsi_metode} adalah {predictions}")
+            st.write(f"hasil prediksi menggunakan metode SVM adalah pelabelan manual {predictions_manual}")
+            st.write(f"hasil prediksi menggunakan metode SVM adalah pelabelan textblob {predictions_textblob}")
         else:
             st.write('Hasil') 
 
