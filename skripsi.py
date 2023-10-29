@@ -83,17 +83,9 @@ def stopword (kalimat_baru):
 def stemming(kalimat_baru):
     factory = StemmerFactory()
     stemmer = factory.create_stemmer()
-    term_dict = {}
-    for document in [kalimat_baru]:
-        for term in document:
-            if term not in term_dict:
-                term_dict[term] = ' '
-    for term in term_dict:
-        term_dict[term] = stemmer.stem(term)
-    def stemmingText(document):
-        return [term_dict[term] for term in document]
-    kalimat_baru = stemmingText(kalimat_baru)
-    return kalimat_baru
+    # Lakukan stemming pada setiap kata
+    stemmed_words = [stemmer.stem(word) for word in kalimat_baru]
+    return stemmed_words
 
 
 # mengambil kolom Stopword Removal dan Sentiment pada dataset
