@@ -132,7 +132,7 @@ Y_manual = dataset_manual['Sentimen']
 vectorizer = TfidfVectorizer()
 
 X_textblob = dataset_textblob['Stopword Removal']
-X_textblob = dataset_textblob['Sentimen']
+Y_textblob = dataset_textblob['Sentimen']
 
 
 def train_sentiment_svm(data, labels):
@@ -140,7 +140,7 @@ def train_sentiment_svm(data, labels):
     X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.2, random_state=42)
 
     # Membuat vektor fitur dari data teks dengan TF-IDF
-    vectorizer = TfidfVectorizer()
+
     X_train_tfidf = vectorizer.fit_transform(X_train)
 
     # Melatih model SVM
@@ -316,7 +316,7 @@ elif(selected == 'Uji') :
             if st.button('predik') :
                 st.write('Hasil pengujian dengan metode',opsi_metode)
                 # Making the SVM Classifer
-                model, vectorizer = train_sentiment_svm(X_textblob, X_textblob)
+                model, vectorizer = train_sentiment_svm(X_textblob, Y_textblob)
                 predictions = predict_sentiment(model, vectorizer, kdatastr)
                 st.write('hasil cleansing :',str(kcleansing))
                 st.write('hasil casefolding :',str(kcasefolding))
@@ -343,7 +343,7 @@ elif(selected == 'Uji') :
         if st.button('prediksi') :
             model_manual, vectorizer_manual = train_sentiment_svm(X_manual, Y_manual)
             predictions_manual = predict_sentiment(model_manual, vectorizer_manual, kdatastr)
-            model_textblob, vectorizer_textblob = train_sentiment_svm(X_textblob, X_textblob)
+            model_textblob, vectorizer_textblob = train_sentiment_svm(X_textblob, Y_textblob)
             predictions_textblob = predict_sentiment(model_textblob, vectorizer_textblob, kdatastr)
             st.write('hasil cleansing :',str(kcleansing))
             st.write('hasil casefolding :',str(kcasefolding))
